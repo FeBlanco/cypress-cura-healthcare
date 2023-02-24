@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "cy:open": "cypress open",
+    "test": "cypress run"
+  },
+  "name": "saucedemo-tests",
+  "version": "1.0.0",
+  "description": "Projeto de testes end 2 end web do app CURA Healthcare Service",
+  "main": "index.js",
+  "author": "Felipe Blanco",
+  "license": "MIT",
+  "devDependencies": {
+    "chance": "^1.1.10",
+    "cypress": "12.6.0"
+  },
+  "dependencies": {
+    "cypress-browser-permissions": "^1.1.0"
+  }
+}
