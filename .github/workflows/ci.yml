@@ -1,25 +1,25 @@
-name: End-to-end tests
+name: Cypress Tests with installation job
 
 on: [push]
 
 jobs:
-
-  ui-chrome-tests:
+  install:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node14.17.0-chrome88-ff89
-    strategy:
-      fail-fast: false
+    container: cypress/browsers:node12.18.3-chrome87-ff82
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      
-      - name: 'UI Tests - Chrome'
-        uses: cypress-io/github-action@v2
+        uses: actions/checkout@v3
+
+      - name: Cypress install
+        uses: cypress-io/github-action@v5.x.x # use the explicit version number
         with:
-          install-command: yarn install
-          wait-on: ${{ secrets.BASE_URL }}
-          wait-on-timeout: 120
-          browser: chrome
-          record: true
-          group: 'UI - Chrome'
-          spec: cypress/e2e/*
+          # Disable running of tests within install job
+          runTests: false
+          build: yarn build
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
